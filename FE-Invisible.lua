@@ -1,6 +1,7 @@
 -- FE Invisible by YetAnotherDumbBoi/Error-Cezar
 -- Inspired from BitingTheDust version ; https://v3rmillion.net/member.php?action=profile&uid=1628149
 
+local First = true
 local SoundService = game:GetService("SoundService")
 local StoredCF
 local SafeZone
@@ -12,6 +13,7 @@ else
 end
 
 local ScriptStart = true
+local DeleteOnDeath = {}
 local Activate
 local Noclip
 if _G.Key == nil then
@@ -39,9 +41,9 @@ function notify(Message)
 end
 
 if _G.Running then
-   return notify("Script is already running")
-   else
-       _G.Running = true
+	return notify("Script is already running")
+else
+	_G.Running = true
 end
 
 local IsInvisible = false
@@ -86,26 +88,34 @@ for i, v in pairs(RealChar:GetChildren()) do
 end
 
 function StopScript()
-    	if ScriptStart == false then return end
-    if Died == false then
-        notify("The character used died!\nStopping...")
-    Part:Destroy()
-    if IsInvisible then
-    Visible() 
-    WasInvisible = true
-    end
-    
-    if FakeChar then
-        FakeChar:Destroy()
-    end
-    
-    if RealChar:WaitForChild("Humanoid").Health > 0 and WasInvisible then
-        RealChar:WaitForChild("Humanoid").Health = 0
-    end
-    _G.Running = false
-    ScriptStart = false
-    notify("You can rerun the script when ever you want!")
-end
+	if ScriptStart == false then return end
+	if Died == false then
+		notify("The character used died!\nStopping...")
+		Part:Destroy()
+		if IsInvisible then
+			Visible() 
+			WasInvisible = true
+		end
+
+		if FakeChar then
+			FakeChar:Destroy()
+		end
+
+		if RealChar:WaitForChild("Humanoid").Health > 0 and WasInvisible then
+			RealChar:WaitForChild("Humanoid").Health = 0
+			for _,v in pairs(DeleteOnDeath) do
+				v:Destroy()
+			end
+			
+		else
+			for _,v in pairs(DeleteOnDeath) do
+				v.ResetOnSpawn = true
+			end
+		end
+		_G.Running = false
+		ScriptStart = false
+		notify("You can rerun the script when ever you want!")
+	end
 end
 
 RealChar:WaitForChild("Humanoid").Died:Connect(function()
@@ -114,29 +124,37 @@ end)
 
 
 FakeChar:WaitForChild("Humanoid").Died:Connect(function()
-StopScript()
+	StopScript()
 end)
 
 function Invisible()
 	StoredCF = RealChar:GetPrimaryPartCFrame()
+	for _,v in pairs(LP:WaitForChild("PlayerGui"):GetChildren()) do 
+		if v:IsA("ScreenGui") then
+			if v.ResetOnSpawn == true then
+				v.ResetOnSpawn = false
+				table.insert(DeleteOnDeath, v)
+			end
+		end
+	end
 	if Part == nil then
 		FakeChar:WaitForChild("HumanoidRootPart").Anchored = false
 	end
+	if Noclip == true then
 	for _, child in pairs(FakeChar:GetDescendants()) do
 		if child:IsA("BasePart") and child.CanCollide == true then
-			child.CanCollide = true
+			child.CanCollide = false
+		end
 		end
 	end
 	FakeChar:SetPrimaryPartCFrame(StoredCF)
 	LP.Character = FakeChar
 	game:GetService("Workspace").CurrentCamera.CameraSubject = FakeChar:WaitForChild("Humanoid")
-	if Noclip == false then
 		for _, child in pairs(RealChar:GetDescendants()) do
 			if child:IsA("BasePart") and child.CanCollide == true then
 				child.CanCollide = false
 			end
 		end
-	end
 
 	RealChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
 	if Part == nil then
