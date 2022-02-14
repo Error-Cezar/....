@@ -13,6 +13,7 @@ else
 end
 
 local ScriptStart = true
+local Reset = false
 local DeleteOnDeath = {}
 local Activate
 local Noclip
@@ -51,6 +52,7 @@ local WasInvisible = false
 local Died = false
 local LP = game:GetService("Players").LocalPlayer
 local UserInputService = game:GetService("UserInputService")
+repeat wait() until LP.Character
 repeat wait() until LP.Character:FindFirstChild("Humanoid")
 local RealChar = LP.Character or LP.CharacterAdded:Wait()
 RealChar.Archivable = true
@@ -92,17 +94,34 @@ function StopScript()
 	if Died == false then
 		notify("The character used died!\nStopping...")
 		Part:Destroy()
-		if IsInvisible then
+		if IsInvisible and RealChar:FindFirstChild("HumanoidRootPart") then
 			Visible() 
 			WasInvisible = true
 		end
+		
+		if IsInvisible == false and LP.Character:WaitForChild("Humanoid").Health == 0 then
+			WasInvisible = true
+		end
+		if not RealChar:FindFirstChild("Humanoid") then
+			Reset = true
+		end
+		
+		game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
 
 		if FakeChar then
 			FakeChar:Destroy()
 		end
 
-		if RealChar:WaitForChild("Humanoid").Health > 0 and WasInvisible then
-			RealChar:WaitForChild("Humanoid").Health = 0
+		if WasInvisible then
+			local char = LP.Character
+			if char:FindFirstChildOfClass("Humanoid") then char:FindFirstChildOfClass("Humanoid"):ChangeState(15) end
+			char:ClearAllChildren()
+			local newChar = Instance.new("Model")
+			newChar.Parent = workspace
+			LP.Character = newChar
+			wait()
+			LP.Character = char
+			newChar:Destroy()
 			for _,v in pairs(DeleteOnDeath) do
 				v:Destroy()
 			end
@@ -114,7 +133,11 @@ function StopScript()
 		end
 		_G.Running = false
 		ScriptStart = false
-		notify("You can rerun the script when ever you want!")
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
+		LP.CharacterAdded:Connect(function()
+			if ScriptStart == true and Reset == false then return end
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
+		end)
 	end
 end
 
@@ -129,7 +152,10 @@ end)
 
 function Invisible()
 	StoredCF = RealChar:GetPrimaryPartCFrame()
-	for _,v in pairs(LP:WaitForChild("PlayerGui"):GetChildren()) do 
+	
+if First == true then
+		First = false
+		for _,v in pairs(LP:WaitForChild("PlayerGui"):GetChildren()) do 
 		if v:IsA("ScreenGui") then
 			if v.ResetOnSpawn == true then
 				v.ResetOnSpawn = false
@@ -137,6 +163,8 @@ function Invisible()
 			end
 		end
 	end
+	end
+	
 	if Part == nil then
 		FakeChar:WaitForChild("HumanoidRootPart").Anchored = false
 	end
@@ -203,9 +231,7 @@ end
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	if ScriptStart == false then return end
 	if gameProcessed then return end
-	print(input.KeyCode.Name)
 	if input.KeyCode.Name:lower() ~= Activate:lower() then return end
-	print(IsInvisible)
 	if IsInvisible == false then
 		Invisible()
 		IsInvisible = true
