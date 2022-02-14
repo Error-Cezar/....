@@ -104,6 +104,7 @@ function StopScript()
 		end
 		if not RealChar:FindFirstChild("Humanoid") then
 			Reset = true
+			print("a")
 		end
 		
 		game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
@@ -135,7 +136,7 @@ function StopScript()
 		ScriptStart = false
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
 		LP.CharacterAdded:Connect(function()
-			if ScriptStart == true and Reset == false then return end
+			if Reset == false then return end
 			loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
 		end)
 	end
