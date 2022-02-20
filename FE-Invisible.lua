@@ -245,6 +245,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 end)
 
 LP.Chatted:Connect(function(msg)
+	print(ScriptStart)
 	if ScriptStart == false then return end
 	msg = msg:lower()
 	if msg == "/e stop" then
