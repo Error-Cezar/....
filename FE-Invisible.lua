@@ -254,6 +254,8 @@ LP.Chatted:Connect(function(msg)
 	if msg == "/e cmds" then
 		_G.Header = "Commands avaiable"
 		_G.Message = "/e cmds -- Show this gui \n /e stop -- Stop the script \n /e noclip -- turn on/off noclip"
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/Notif.lua'))()
+
 	end
 	
 	if msg == "/e noclip" then
