@@ -2,6 +2,7 @@
 -- Inspired from BitingTheDust version ; https://v3rmillion.net/member.php?action=profile&uid=1628149
 
 local First = true
+local Restart = true
 local SoundService = game:GetService("SoundService")
 local StoredCF
 local SafeZone
@@ -57,6 +58,7 @@ repeat wait() until LP.Character:FindFirstChild("Humanoid")
 local RealChar = LP.Character or LP.CharacterAdded:Wait()
 RealChar.Archivable = true
 local FakeChar = RealChar:Clone()
+FakeChar:WaitForChild("Humanoid").DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
 FakeChar.Parent = game:GetService("Workspace")
 
 for _, child in pairs(FakeChar:GetDescendants()) do
@@ -92,7 +94,11 @@ end
 function StopScript()
 	if ScriptStart == false then return end
 	if Died == false then
-		notify("The character used died!\nStopping...")
+		if Restart == true then
+			notify("The character used died!\nStopping...")
+		else
+			notify("Script successfuly ended !")
+		end
 		Part:Destroy()
 		if IsInvisible and RealChar:FindFirstChild("HumanoidRootPart") then
 			Visible() 
@@ -134,11 +140,15 @@ function StopScript()
 		end
 		_G.Running = false
 		ScriptStart = false
+		if Restart == true then
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
-		LP.CharacterAdded:Connect(function()
-			if Reset == false then return end
+		end
+		
+			LP.CharacterAdded:Connect(function()
+				if Reset == false then return end
 			loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
 		end)
+		
 	end
 end
 
@@ -166,9 +176,6 @@ if First == true then
 	end
 	end
 	
-	if Part == nil then
-		FakeChar:WaitForChild("HumanoidRootPart").Anchored = false
-	end
 	if Noclip == true then
 	for _, child in pairs(FakeChar:GetDescendants()) do
 		if child:IsA("BasePart") and child.CanCollide == true then
@@ -177,6 +184,7 @@ if First == true then
 		end
 	end
 	FakeChar:SetPrimaryPartCFrame(StoredCF)
+	FakeChar:WaitForChild("HumanoidRootPart").Anchored = false
 	LP.Character = FakeChar
 	game:GetService("Workspace").CurrentCamera.CameraSubject = FakeChar:WaitForChild("Humanoid")
 		for _, child in pairs(RealChar:GetDescendants()) do
@@ -186,9 +194,7 @@ if First == true then
 		end
 
 	RealChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
-	if Part == nil then
 		RealChar:WaitForChild("HumanoidRootPart").Anchored = true
-	end
 	RealChar:WaitForChild("Humanoid"):UnequipTools()
 
 	for i, v in pairs(FakeChar:GetChildren()) do
@@ -200,15 +206,13 @@ end
 
 function Visible()
 	StoredCF = FakeChar:GetPrimaryPartCFrame()
-	if Part == nil then
-		RealChar:WaitForChild("HumanoidRootPart").Anchored = false
-	end
 	for _, child in pairs(RealChar:GetDescendants()) do
 		if child:IsA("BasePart") and child.CanCollide == true then
 			child.CanCollide = true
 		end
 	end
 	RealChar:SetPrimaryPartCFrame(StoredCF)
+	RealChar:WaitForChild("HumanoidRootPart").Anchored = false
 	LP.Character = RealChar
 	FakeChar:WaitForChild("Humanoid"):UnequipTools()
 	game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
@@ -218,9 +222,7 @@ function Visible()
 		end
 	end
 	FakeChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
-	if Part == nil then
 		FakeChar:WaitForChild("HumanoidRootPart").Anchored = true
-	end
 	for i, v in pairs(FakeChar:GetChildren()) do
 		if v:IsA("LocalScript") then
 			v.Disabled = true
@@ -242,4 +244,24 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	end
 end)
 
+LP.Chatted:Connect(function(msg)
+	msg = msg:lower()
+	if msg == "/e stop" then
+		Restart = false
+		StopScript()
+	end
+	
+	if msg == "/e cmds" then
+		_G.Header = "Commands avaiable"
+		_G.Message = "/e cmds -- Show this gui \n /e stop -- Stop the script \n /e noclip -- turn on/off noclip"
+	end
+	
+	if msg == "/e noclip" then
+		Noclip = not Noclip
+		notify("Noclip set to "..tostring(Noclip))
+	end
+end)
+
 notify("Press "..Activate.." to turn on/off invisibility!")
+notify("Say /e cmds for commands")
+
