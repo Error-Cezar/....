@@ -268,5 +268,5 @@ LP.Chatted:Connect(function(msg)
 end)
 
 notify("Press "..Activate.." to turn on/off invisibility!")
-notify("Say /e cmds for commands")
+notify("Script is currently bugged and is working like a fake lag.")
 
