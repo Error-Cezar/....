@@ -9,6 +9,7 @@ local LP = Players.LocalPlayer
 function module:TeleportToPart(part)
     if not part:IsA("Part") and not part:IsA("MeshPart") and not part:IsA("CornerWedgePart") and not part:IsA("TrussPart") and not part:IsA("WedgePart") then
        warn("Expected <Part type> Instance")
+       return
     end
 LP.Character:SetPrimaryPartCFrame(part.CFrame)
 end
@@ -48,6 +49,7 @@ function module:ServerHop()
 end
 
 function module:Loadstring(rawlink)
+    if rawlink == nil then warn("Rawlink expected.")
 loadstring(game:HttpGet(rawlink)) ()
 end
 
