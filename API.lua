@@ -14,13 +14,17 @@ LP.Character:SetPrimaryPartCFrame(part.CFrame)
 end
 
 function module:TeleportToPlayer(player)
-    local found = false
-    for _, australia in pairs(Players:GetPlayers()) do
-		if string.sub(string.lower(australia.Name), 0, string.len(player)) == string.lower(player) then
-			found = true
-            LP.Character:SetPrimaryPartCFrame(australia.Character:WaitForChild("HumanoidRootPart").CFrame)
-		end
-	end
+    local plr = nil
+
+  if typeof(player) ~= "Instance" then
+  for _, australia in pairs(Players:GetPlayers()) do
+    if string.sub(string.lower(australia.Name), 0, string.len(player)) == string.lower(player) then
+        plr = australia
+    end
+   end
+  end
+  if plr == nil then warn("Player not found.") return end
+ LP.Character:SetPrimaryPartCFrame(plr.Character:WaitForChild("HumanoidRootPart").CFrame)
 end
 
 
