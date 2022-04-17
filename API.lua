@@ -18,7 +18,7 @@ function module:TeleportToPlayer(player)
     for _, australia in pairs(Players:GetPlayers()) do
 		if string.sub(string.lower(australia.Name), 0, string.len(player)) == string.lower(player) then
 			found = true
-            LP.Character:SetPrimaryPartCFrame(australia:WaitForChild("HumanoidRootPart").CFrame)
+            LP.Character:SetPrimaryPartCFrame(australia.Character:WaitForChild("HumanoidRootPart").CFrame)
 		end
 	end
 end
