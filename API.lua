@@ -73,7 +73,7 @@ end
 function module:View(player)
 local plr = nil
 
-  if typeof(player) ~= "Instance" 
+  if typeof(player) ~= "Instance" then
   for _, australia in pairs(Players:GetPlayers()) do
     if string.sub(string.lower(australia.Name), 0, string.len(player)) == string.lower(player) then
         plr = australia
