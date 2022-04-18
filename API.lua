@@ -1,4 +1,5 @@
 -- Error's API by Error-Cezar yes yes
+
 module = {}
 
 local httpService = game:GetService("HttpService")
@@ -7,7 +8,7 @@ local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
 
 function module:TeleportToPart(part)
-    if not part:IsA("Part") and not part:IsA("MeshPart") and not part:IsA("CornerWedgePart") and not part:IsA("TrussPart") and not part:IsA("WedgePart") then
+    if not part:IsA("BasePart") then
        warn("Expected <Part type> Instance")
        return
     end
@@ -90,9 +91,82 @@ local plr = nil
 Workspace.CurrentCamera.CameraSubject = plr.Character
 end
 
-function module:Esp(toggle)
-warn("Esp doesn't exist yet xd") 
-return
+function module:Esp(toggle, player)
+    if toggle == false and game:GetService("CoreGui"):FindFirstChild("Silver Balls") then
+        game:GetService("CoreGui"):FindFirstChild("Silver Balls"):Destroy()
+        return
+    end 
+warn("Idk first time trying to make an ESP so yea.") 
+local GUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+GUI.Name = "Silver Balls"
+if player ~= nil then
+    if not player.Character then return warn("Invalid player.") end
+                local BillboardGui = Instance.new("BillboardGui", GUI)
+				local TextLabel = Instance.new("TextLabel", BillboardGui)
+				BillboardGui.Adornee = player.Character.Head
+				BillboardGui.Name = player.Name
+				BillboardGui.Size = UDim2.new(0, 100, 0, 150)
+				BillboardGui.StudsOffset = Vector3.new(0, 1, 0)
+				BillboardGui.AlwaysOnTop = true
+				TextLabel.BackgroundTransparency = 1
+				TextLabel.Position = UDim2.new(0, 0, 0, -50)
+				TextLabel.Size = UDim2.new(0, 100, 0, 100)
+				TextLabel.Font = Enum.Font.SourceSansSemibold
+				TextLabel.TextSize = 20
+				TextLabel.TextColor3 = Color3.new(1, 1, 1)
+				TextLabel.TextStrokeTransparency = 0
+				TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+				TextLabel.Text = 'Name: '..plr.Name.." | HP: "..plr.Character.Humanoid.Health.."\nTeam: "..plr.Team.Name
+				TextLabel.ZIndex = 10
+    for _,v in pairs(player.Character:GetChildren()) do
+        if v:IsA("BasePart") then
+            local a = Instance.new("BoxHandleAdornment", GUI)
+            a.Name = player.Name
+            a.Adornee = v
+            a.AlwaysOnTop = true
+            a.Size = v.Size
+            a.Color = player.TeamColor
+        end
+    end
+else
+    for _,player in pairs(Players:GetPlayers()) do
+        if player.Name ~= LP.Name then
+        local BillboardGui = Instance.new("BillboardGui", GUI)
+        local TextLabel = Instance.new("TextLabel", BillboardGui)
+        BillboardGui.Adornee = player.Character.Head
+        BillboardGui.Name = player.Name
+        BillboardGui.Size = UDim2.new(0, 100, 0, 150)
+        BillboardGui.StudsOffset = Vector3.new(0, 1, 0)
+        BillboardGui.AlwaysOnTop = true
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.Position = UDim2.new(0, 0, 0, -50)
+        TextLabel.Size = UDim2.new(0, 100, 0, 100)
+        TextLabel.Font = Enum.Font.SourceSansSemibold
+        TextLabel.TextSize = 20
+        TextLabel.TextColor3 = Color3.new(1, 1, 1)
+        TextLabel.TextStrokeTransparency = 0
+        TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+        TextLabel.Text = 'Name: '..plr.Name.." | HP: "..plr.Character.Humanoid.Health.."\nTeam: "..plr.Team.Name
+        TextLabel.ZIndex = 10
+        for _,v in pairs(player.Character:GetChildren()) do
+           if v:IsA("BasePart") then
+              local a = Instance.new("BoxHandleAdornment", GUI)
+               a.Name = player.Name
+               a.Adornee = v
+               a.AlwaysOnTop = true
+               a.Size = v.Size
+               a.Color = player.TeamColor
+            end
+        end
+    end
+    end
+end
+end
+
+function module:TriggerInterest(Interest)
+    firetouchinterest(LP.Character.HumanoidRootPart, Interest, 1)
+    wait(0.1)
+    firetouchinterest(LP.Character.HumanoidRootPart, Interest, 0)
 end
 
 return module
