@@ -50,7 +50,7 @@ function module:ServerHop()
 end
 
 function module:Loadstring(rawlink)
-    if rawlink == nil then warn("Rawlink expected.")
+    if rawlink == nil then return warn("Rawlink expected.") end
 loadstring(game:HttpGet(rawlink)) ()
 end
 
