@@ -116,7 +116,7 @@ if player ~= nil then
 				TextLabel.TextColor3 = Color3.new(1, 1, 1)
 				TextLabel.TextStrokeTransparency = 0
 				TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
-				TextLabel.Text = 'Name: '..plr.Name.." | HP: "..plr.Character.Humanoid.Health.."\nTeam: "..plr.Team.Name
+				TextLabel.Text = 'Name: '..player.Name.." | HP: "..player.Character.Humanoid.Health.."\nTeam: "..player.Team.Name
 				TextLabel.ZIndex = 10
     for _,v in pairs(player.Character:GetChildren()) do
         if v:IsA("BasePart") then
@@ -146,7 +146,7 @@ else
         TextLabel.TextColor3 = Color3.new(1, 1, 1)
         TextLabel.TextStrokeTransparency = 0
         TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
-        TextLabel.Text = 'Name: '..plr.Name.." | HP: "..plr.Character.Humanoid.Health.."\nTeam: "..plr.Team.Name
+        TextLabel.Text = 'Name: '..player.Name.." | HP: "..player.Character.Humanoid.Health.."\nTeam: "..player.Team.Name
         TextLabel.ZIndex = 10
         for _,v in pairs(player.Character:GetChildren()) do
            if v:IsA("BasePart") then
