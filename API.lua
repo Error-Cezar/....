@@ -304,5 +304,4 @@ end
 				wait(0.1)
 				firetouchinterest(LP.Character.HumanoidRootPart, Interest, 0)
 			end
-			module:Esp(true)
 			return module
