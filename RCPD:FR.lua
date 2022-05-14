@@ -1,3 +1,5 @@
+-- By Error-Cezar#2048
+
 local Staff = {}
 local crash = nil
 
