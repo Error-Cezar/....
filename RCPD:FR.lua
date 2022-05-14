@@ -64,7 +64,7 @@ local Top = "L" -- The string will be the top text
 
 local Bottom = "L" -- The string will be the bottom text
 
--- Sends 911 requests to all emergency teams, making them crash (if you don't want to crash go to a civilian team)
+-- Sends 911 requests to all emergency teams, making them crash.
 
 game:GetService("ReplicatedStorage").siniScripts.Radio.newCall:FireServer("FD", Top, Bottom)
 
