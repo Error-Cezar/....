@@ -8,6 +8,7 @@ local Workspace = game:GetService("Workspace")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
 local GUI = nil
+local PlayerOnly = false
 
 function module:TeleportToPart(part)
 	if not part:IsA("BasePart") then
@@ -238,6 +239,7 @@ function module:Esp(toggle, player)
 	GUI.Name = "Silver Balls"
 	if player ~= nil then
 		if not player.Character then return warn("Invalid player.") end
+		PlayerOnly = true
 		task.spawn(function()
 			local Temp2 = player:GetPropertyChangedSignal("Team"):Connect(function()
 				Update(player)
@@ -251,6 +253,7 @@ function module:Esp(toggle, player)
 		end)
 		Add(player)
 	else
+		PlayerOnly = false
 		for _,player in pairs(Players:GetPlayers()) do
             if player.Name ~= LP.Name then
 			task.spawn(function()
@@ -279,7 +282,7 @@ end
 	end)
 
 	Players.PlayerAdded:Connect(function(player)
-		if GUI ~= nil then
+		if GUI ~= nil and PlayerOnly == false then
 		
             repeat wait() until player.Character
 					repeat wait() until player.Character:FindFirstChild("Humanoid")
