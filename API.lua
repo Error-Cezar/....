@@ -94,6 +94,27 @@ function module:View(player)
 	Workspace.CurrentCamera.CameraSubject = plr.Character
 end
 
+
+function module:UnView()
+	if Workspace.CurrentCamera.CameraSubject == LP.Character then warn("View isn't active at the moment.") return end
+	Workspace.CurrentCamera.CameraSubject = LP.Character
+end
+
+function module:GetPosition(Player)
+	if Player == nil then Player = LP end
+	
+	if typeof(player) ~= "Instance" then
+		for _, australia in pairs(Players:GetPlayers()) do
+			if string.sub(string.lower(australia.Name), 0, string.len(player)) == string.lower(player) then
+				plr = australia
+			end
+		end
+	end
+	if typeof(player) ~= "Instance" then warn("No player found.") return end
+	if not Player.Character or not Player.Character:GetPrimaryPartCFrame() then warn("No character found.") return end
+	return Player.Character:GetPrimaryPartCFrame()
+end
+
 function Update(player)
 	for _,v in pairs(GUI:GetChildren()) do
 		if v.Name == player.Name then v:Destroy() end
