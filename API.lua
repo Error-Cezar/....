@@ -115,6 +115,11 @@ function module:GetPosition(Player)
 	return Player.Character:GetPrimaryPartCFrame()
 end
 
+function module:Equip(item)
+	if not item or not item:IsA("Tool") then warn("No tool found")
+        item.Parent = LP.Character
+end
+
 function Update(player)
 	for _,v in pairs(GUI:GetChildren()) do
 		if v.Name == player.Name then v:Destroy() end
