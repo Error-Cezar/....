@@ -12,7 +12,7 @@ local PlayerOnly = false
 
 function module:TeleportToPart(part)
 	if not part:IsA("BasePart") then
-		warn("Expected <Part type> Instance")
+		warn("Expected <BasePart> Instance")
 		return
 	end
 	LP.Character:SetPrimaryPartCFrame(part.CFrame)
