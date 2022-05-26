@@ -119,6 +119,7 @@ function module:Equip(item)
 	if not item or not item:IsA("Tool") then warn("No tool found")
         item.Parent = LP.Character
 end
+end
 
 function Update(player)
 	for _,v in pairs(GUI:GetChildren()) do
