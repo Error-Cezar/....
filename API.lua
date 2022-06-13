@@ -344,13 +344,13 @@ function module:PartEsp(toggle, part)
     PartGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
 	PartGUI.Name = "Silver"
     end
+	print(part)
 if part:IsA("BasePart") then
 AddPart(part)
 end
 
   if part:IsA("Model") then
      for _,v in pairs(part:GetDescendants()) do
-        print(v)
        if v:IsA("BasePart") then AddPart(v) end
      end
   end
