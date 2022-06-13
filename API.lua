@@ -3,11 +3,13 @@
 module = {}
 
 local ESPStorage = {}
+local ESPPart = {}
 local httpService = game:GetService("HttpService")
 local Workspace = game:GetService("Workspace")
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
 local GUI = nil
+local PartGUI = nil
 local PlayerOnly = false
 
 function module:TeleportToPart(part)
@@ -299,6 +301,69 @@ function module:Esp(toggle, player)
     end
 	end
 end
+
+function AddPart(part)
+	local BillboardGui = Instance.new("BillboardGui", PartGUI)
+	local TextLabel = Instance.new("TextLabel", BillboardGui)
+	BillboardGui.Adornee = part
+	BillboardGui.Name = part:GetFullName()
+	BillboardGui.Size = UDim2.new(0, 100, 0, 150)
+	BillboardGui.StudsOffset = Vector3.new(0, 1, 0)
+	BillboardGui.AlwaysOnTop = true
+	TextLabel.BackgroundTransparency = 1
+	TextLabel.Position = UDim2.new(0, 0, 0, -50)
+	TextLabel.Size = UDim2.new(0, 100, 0, 100)
+	TextLabel.Font = Enum.Font.SourceSansSemibold
+	TextLabel.TextSize = 20
+	TextLabel.TextColor3 = Color3.new(1, 1, 1)
+	TextLabel.TextStrokeTransparency = 0
+	TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+	TextLabel.Text = ''
+	TextLabel.ZIndex = 10
+
+    local a = Instance.new("BoxHandleAdornment", PartGUI)
+    a.Name = part:GetFullName()
+    a.Adornee = part
+    a.AlwaysOnTop = true            
+    a.ZIndex = 10
+    a.Size = part.Size
+    a.Transparency = 0.5
+    table.insert(ESPPart, part)
+end
+
+function module:PartEsp(toggle, part)
+    if typeof(toggle) ~= "boolean" then warn("Expected a bool value") return end
+	if toggle == false and game:GetService("CoreGui"):FindFirstChild("Silver") then
+		game:GetService("CoreGui"):FindFirstChild("Silver"):Destroy()
+		for a,v in pairs(ESPPart) do
+			table.remove(ESPPart, a)
+		end
+		return
+	end 
+    if PartGUI == nil then
+    PartGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+	PartGUI.Name = "Silver"
+    end
+if part:IsA("BasePart") then
+AddPart(part)
+end
+
+  if part:IsA("Model") then
+     for _,v in pairs(part:GetDescendants()) do
+        print(v)
+       if v:IsA("BasePart") then AddPart(v) end
+     end
+  end
+end
+
+game:GetService("Workspace").DescendantRemoving:Connect(function(descendant)
+    if PartGUI ~= nil then
+    for _,v in pairs(PartGUI:GetChildren()) do
+        if v.Name == descendant:GetFullName() then v:Destroy() end
+    end
+end
+end)
+
 
 	Players.PlayerRemoving:Connect(function(player)
 		if GUI ~= nil then
