@@ -335,6 +335,7 @@ function module:PartEsp(toggle, part)
     if typeof(toggle) ~= "boolean" then warn("Expected a bool value") return end
 	if toggle == false and game:GetService("CoreGui"):FindFirstChild("Silver") then
 		game:GetService("CoreGui"):FindFirstChild("Silver"):Destroy()
+		PartGUI = nil
 		for a,v in pairs(ESPPart) do
 			table.remove(ESPPart, a)
 		end
