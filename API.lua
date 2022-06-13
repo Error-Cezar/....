@@ -340,6 +340,7 @@ function module:PartEsp(toggle, part)
 		end
 		return
 	end 
+    if toggle == false then return end
     if PartGUI == nil then
     PartGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
 	PartGUI.Name = "Silver"
