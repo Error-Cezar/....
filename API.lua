@@ -328,7 +328,7 @@ function AddPart(part)
     a.ZIndex = 10
     a.Size = part.Size
     a.Transparency = 0.5
-    a.Color = part.Color
+    a.Color = part.BrickColor
     table.insert(ESPPart, part)
 end
 
