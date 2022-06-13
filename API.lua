@@ -341,7 +341,7 @@ function module:PartEsp(toggle, part)
 		end
 		return
 	end 
-    if toggle == false then return end
+    if toggle == true then
     if PartGUI == nil then
     PartGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
 	PartGUI.Name = "Silver"
@@ -356,6 +356,7 @@ end
        if v:IsA("BasePart") then AddPart(v) end
      end
   end
+end
 end
 
 game:GetService("Workspace").DescendantRemoving:Connect(function(descendant)
