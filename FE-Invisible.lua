@@ -194,6 +194,7 @@ if First == true then
 		end
 
 	RealChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
+	wait()
 		RealChar:WaitForChild("HumanoidRootPart").Anchored = true
 	RealChar:WaitForChild("Humanoid"):UnequipTools()
 
@@ -268,5 +269,3 @@ LP.Chatted:Connect(function(msg)
 end)
 
 notify("Press "..Activate.." to turn on/off invisibility!")
-notify("Script is currently bugged and is working like a fake lag.")
-
