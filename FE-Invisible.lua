@@ -194,8 +194,7 @@ if First == true then
 		end
 
 	RealChar:SetPrimaryPartCFrame(SafeZone * CFrame.new(0, 5, 0))
-	wait()
-		RealChar:WaitForChild("HumanoidRootPart").Anchored = true
+	--	RealChar:WaitForChild("HumanoidRootPart").Anchored = true
 	RealChar:WaitForChild("Humanoid"):UnequipTools()
 
 	for i, v in pairs(FakeChar:GetChildren()) do
@@ -212,8 +211,8 @@ function Visible()
 			child.CanCollide = true
 		end
 	end
-	RealChar:SetPrimaryPartCFrame(StoredCF)
 	RealChar:WaitForChild("HumanoidRootPart").Anchored = false
+	RealChar:SetPrimaryPartCFrame(StoredCF)
 	LP.Character = RealChar
 	FakeChar:WaitForChild("Humanoid"):UnequipTools()
 	game:GetService("Workspace").CurrentCamera.CameraSubject = RealChar:WaitForChild("Humanoid")
