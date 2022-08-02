@@ -1,5 +1,5 @@
 -- Have fun ; https://www.roblox.com/games/4843291950/The-Conspiracies-of-Hawkins
--- Put in autoexecutor ; By Error-Cezar
+-- https://dsc.gg/coolkidd ; By Error-Cezar
 repeat
     wait()
 until game:IsLoaded()
@@ -11,14 +11,6 @@ local ck4 = Global.CK4
 local Chat = Global.Chat
 local start = Global.Enabled
 if game.PlaceId ~= 4843291950 or start == false then return end
-
-if hop == true then
-    if syn then
-        syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
-    else
-        warn("Exploit not supported for auto execution.")
-    end
-end
 
 if ck4 == true and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
 for i=1, 7 do
@@ -56,6 +48,16 @@ repeat
 until #Players:GetPlayers() == 1 or #Players:GetPlayers() == 2
 wait(1)
 if hop == true then
+        if syn then
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+  if State == Enum.TeleportState.Started then
+      syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
+  end
+end)
+    else
+        warn("Exploit not supported for auto execution.")
+    end
+    wait()
 api:ServerHop()
 end
 
