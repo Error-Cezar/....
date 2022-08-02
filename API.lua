@@ -53,10 +53,8 @@ function module:ServerHop()
                 if player == LP then
                    warn("Teleport failed, TeleportResult: "..teleportResult.Name)
                     -- check the teleportResult to ensure it is appropriate to retry
-                    if teleportResult == Enum.TeleportResult.Failiure or teleportResult == Enum.TeleportResult.Flooded then
                 warn("Retrying ServerHoping")
                         module:ServerHop()
-                    end
                 end
             end)
 	else
