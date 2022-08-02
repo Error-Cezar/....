@@ -1,8 +1,6 @@
 -- Have fun ; https://www.roblox.com/games/4843291950/The-Conspiracies-of-Hawkins
 -- https://dsc.gg/coolkidd ; By Error-Cezar
-repeat
-    wait()
-until game:IsLoaded()
+repeat wait() until game:IsLoaded()
 wait(1)
 local Global = getgenv and getgenv() or _G
 local Players = game:GetService("Players")
@@ -50,13 +48,15 @@ wait(1)
 if hop == true then
         if syn then
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+                print(State)
   if State == Enum.TeleportState.Started then
       syn.queue_on_teleport([[
+        repeat wait() until game:IsLoaded()
       local Global = getgenv and getgenv() or _G
-      Global.ServerHop =]]..Global.ServerHop..[[
-      Global.CK4 = ]]..Global.CK4..[[
-      Global.Chat = ]]..Global.Chat..[[
-      Global.Enabled = ]]..Global.Enabled..[[
+      Global.ServerHop =]]..tostring(Global.ServerHop)..[[
+      Global.CK4 = ]]..tostring(Global.CK4)..[[
+      Global.Chat = ]]..tostring(Global.Chat)..[[
+      Global.Enabled = ]]..tostring(Global.Enabled)..[[
       loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
   end
 end)
