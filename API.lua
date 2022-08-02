@@ -49,6 +49,17 @@ function module:ServerHop()
 	end
 	if #x > 0 then
 		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+		local function localTeleportWithRetry(placeId, retryTime)
+       game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage)
+        if player == LP then
+           warn("Teleport failed, TeleportResult: "..teleportResult.Name)
+            -- check the teleportResult to ensure it is appropriate to retry
+            if teleportResult == Enum.TeleportResult.Failiure or teleportResult == Enum.TeleportResult.Flooded then
+		warn("Retrying ServerHoping")
+                module:ServerHop()
+            end
+        end
+    end)
 	else
 		return warn("Couldn't find a server for serverhop.")
 	end
