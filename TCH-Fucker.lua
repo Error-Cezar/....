@@ -51,7 +51,13 @@ if hop == true then
         if syn then
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
   if State == Enum.TeleportState.Started then
-      syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
+      syn.queue_on_teleport([[
+      local Global = getgenv and getgenv() or _G
+      Global.ServerHop =]]..Global.ServerHop..[[
+      Global.CK4 = ]]..Global.CK4..[[
+      Global.Chat = ]]..Global.Chat..[[
+      Global.Enabled = ]]..Global.Enabled..[[
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
   end
 end)
     else
