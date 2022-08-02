@@ -6,11 +6,11 @@ until game:IsLoaded()
 wait(1)
 local Global = getgenv and getgenv() or _G
 local Players = game:GetService("Players")
-local hop = Global.ServerHop or true
-local ck4 = Global.CK4 or true
-local Chat = Global.Chat or false
-local start = Global.Enabled or true
-if not game.PlaceId == 4843291950 or not start then return end
+local hop = Global.ServerHop
+local ck4 = Global.CK4
+local Chat = Global.Chat
+local start = Global.Enabled
+if game.PlaceId ~= 4843291950 or start == false then return end
 
 if ck4 == true then
 for i=1, 7 do
