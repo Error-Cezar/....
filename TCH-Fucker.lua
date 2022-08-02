@@ -20,7 +20,7 @@ if hop == true then
     end
 end
 
-if ck4 == true then
+if ck4 == true and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
 for i=1, 7 do
 local ohString1 = "Rekt by Team C00lkidd 4 ; dsc.gg/coolkidd"
 local ohString2 = "all"
