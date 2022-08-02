@@ -12,6 +12,14 @@ local Chat = Global.Chat
 local start = Global.Enabled
 if game.PlaceId ~= 4843291950 or start == false then return end
 
+if hop == true then
+    if syn then
+        syn.queue_on_teleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/TCH-Fucker.lua"))()]])
+    else
+        warn("Exploit not supported for auto execution.")
+    end
+end
+
 if ck4 == true then
 for i=1, 7 do
 local ohString1 = "Rekt by Team C00lkidd 4 ; dsc.gg/coolkidd"
