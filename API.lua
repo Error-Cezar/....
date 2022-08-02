@@ -49,10 +49,12 @@ function module:ServerHop()
 	end
 	if #x > 0 then
 		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
-            game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage)
+            connection = game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage)
                 if player == LP then
                    warn("Teleport failed, TeleportResult: "..teleportResult.Name)
                     -- check the teleportResult to ensure it is appropriate to retry
+			connection:Disconnect()
+			connection = nil
                 warn("Retrying ServerHoping")
                         module:ServerHop()
                 end
