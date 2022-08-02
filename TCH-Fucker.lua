@@ -8,6 +8,7 @@ local hop = Global.ServerHop
 local ck4 = Global.CK4
 local Chat = Global.Chat
 local start = Global.Enabled
+local Destroy = Global.Destroy
 if game.PlaceId ~= 4843291950 or start == false then return end
 
 if ck4 == true and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
@@ -28,6 +29,17 @@ _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 if Chat == false and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
 Del(game:GetService("ReplicatedStorage").BetterChatShared)
+end
+
+if Destroy then
+    local index = 0
+    for _,v in pairs(game:GetDescendants()) do
+        if v:IsA("Script") or v:IsA("LocalScript") then
+            if index % 73 == 0 then wait(0.01) end   
+            game:GetService("ReplicatedStorage").DeleteCar:FireServer(v) 
+            index = index + 1
+        end  
+    end
 end
 
 Players.PlayerAdded:Connect(function(player)
@@ -66,4 +78,3 @@ end)
     wait()
 api:ServerHop()
 end
-
