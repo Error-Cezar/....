@@ -13,7 +13,7 @@ if game.PlaceId ~= 4843291950 or start == false then return end
 
 if ck4 == true and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
 for i=1, 7 do
-local ohString1 = "Rekt by Team C00lkidd 4 ; dsc.gg/coolkidd"
+local ohString1 = "Rekt by Team C00lkidd 4 ; dsc.gg/coolkidd4 Join us."
 local ohString2 = "all"
 local ohTable3 = {}
 local ohBoolean4 = false
