@@ -266,23 +266,3 @@ LP.Chatted:Connect(function(msg)
 		notify("Noclip set to "..tostring(Noclip))
 	end
 end)
-
-local ismobile = game:GetService("UserInputService").TouchEnabled
-
-if not ismobile then
-notify("Press "..Activate.." to turn on/off invisibility!")
-else
-notify("Mobile device detected.")
-local GUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FEInvisibleMobile.lua"))()
-wait()
-local Button = GUI:CreateGui()
-Button.MouseButton1Click:Connect(function()
-    if IsInvisible == false then
-		Invisible()
-		IsInvisible = true
-	else
-		Visible()
-		IsInvisible = false
-	end
-end)
-end
