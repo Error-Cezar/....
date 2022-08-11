@@ -6,9 +6,9 @@ local Restart = true
 local SoundService = game:GetService("SoundService")
 local StoredCF
 local SafeZone
-if Global.CFrame ~= nil then
-	if type(Global.CFrame) ~= "userdata" then return error("CFrame must be a userdata (CFrame.new(X, X, X)") end
-	SafeZone = Global.CFrame
+if Global.SafeZone ~= nil then
+	if type(Global.SafeZone) ~= "userdata" then return error("CFrame must be a userdata (CFrame.new(X, X, X)") end
+	SafeZone = Global.SafeZone
 else
 	SafeZone = CFrame.new(0,-300,0)       
 end
