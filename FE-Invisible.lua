@@ -1,14 +1,14 @@
 -- FE Invisible by YetAnotherDumbBoi/Error-Cezar
 -- Inspired from BitingTheDust version ; https://v3rmillion.net/member.php?action=profile&uid=1628149
-
+local Global = getgenv and getgenv() or _G
 local First = true
 local Restart = true
 local SoundService = game:GetService("SoundService")
 local StoredCF
 local SafeZone
-if _G.CFrame ~= nil then
-	if type(_G.CFrame) ~= "userdata" then return error("CFrame must be a userdata (CFrame.new(X, X, X)") end
-	SafeZone = _G.CFrame
+if Global.CFrame ~= nil then
+	if type(Global.CFrame) ~= "userdata" then return error("CFrame must be a userdata (CFrame.new(X, X, X)") end
+	SafeZone = Global.CFrame
 else
 	SafeZone = CFrame.new(0,-300,0)       
 end
@@ -18,16 +18,16 @@ local Reset = false
 local DeleteOnDeath = {}
 local Activate
 local Noclip
-if _G.Key == nil then
+if Global.Key == nil then
 	Activate = "F"
 else
-	Activate = tostring(_G.Key)     
+	Activate = tostring(Global.Key)     
 end
 
-if _G.Noclip == nil then
+if Global.Noclip == nil then
 	Noclip = false
 else
-	Noclip = _G.Noclip        
+	Noclip = Global.Noclip        
 end
 
 if type(Noclip) ~= "boolean" then return error("Noclip value isn't a boolean") end
@@ -42,10 +42,10 @@ function notify(Message)
 	SoundService:PlayLocalSound(sound)
 end
 
-if _G.Running then
+if Global.Running then
 	return notify("Script is already running")
 else
-	_G.Running = true
+	Global.Running = true
 end
 
 local IsInvisible = false
@@ -138,7 +138,7 @@ function StopScript()
 				v.ResetOnSpawn = true
 			end
 		end
-		_G.Running = false
+		Global.Running = false
 		ScriptStart = false
 		if Restart == true then
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/FE-Invisible.lua'))()
@@ -254,8 +254,8 @@ LP.Chatted:Connect(function(msg)
 	end
 	
 	if msg == "/e cmds" then
-		_G.Header = "Commands avaiable"
-		_G.Message = "/e cmds -- Show this gui \n /e stop -- Stop the script \n /e noclip -- turn on/off noclip"
+		Global.Header = "Commands avaiable"
+		Global.Message = "/e cmds -- Show this gui \n /e stop -- Stop the script \n /e noclip -- turn on/off noclip"
 		print("e")
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/Error-Cezar/Roblox-Scripts/main/Notif.lua'))()
 
