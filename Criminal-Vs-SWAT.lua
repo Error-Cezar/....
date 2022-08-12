@@ -1,11 +1,22 @@
 -- https://www.roblox.com/games/510444657/CRIMINAL-VS-SWAT
 local Global = getgenv and getgenv() or _G
 
-local TeamCheck = Global.TeamCheck or true
-local Loop = Global.Loop or true
+local TeamCheck = Global.TeamCheck or false
+local Loop = Global.LoopKill or false
 local StopMessage = Global.StopMessage or "stop"
 
+function notify(title, Message)
+	game:GetService("StarterGui"):SetCore("SendNotification", { 
+		Title = title;
+		Text = Message;
+		Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+end
+
+
 function Kill(v: Player)
+    if not v.Character then return end
+    if not v.Character:FindFirstChild("Humanoid") then return end
+    if not v.Character:FindFirstChild("Head") then return end
     local ohInstance1 = v.Character.Humanoid
     local ohInstance2 = v.Character.Head
     local ohNumber3 = 105
@@ -13,8 +24,16 @@ function Kill(v: Player)
     local ohNumber5 = 0
     local ohBoolean6 = false
     local ohBoolean7 = false
-    
-    game:GetService("Players").LocalPlayer.Backpack.Sniperswat.GunScript_Server.InflictTarget:FireServer(ohInstance1, ohInstance2, ohNumber3, ohVector34, ohNumber5, ohBoolean6, ohBoolean7)
+    local Gun = game:GetService("Players").LocalPlayer.Character:FindFirstAncestorWhichIsA("Tool")
+    if Gun == nil then
+        for _,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+            if string.find(v.Name:lower(), "sniper") then
+                Gun = v
+            end
+        end
+    end
+    if Gun == nil then notify("Error", "No valid weapon found.") return end
+    Gun.GunScript_Server.InflictTarget:FireServer(ohInstance1, ohInstance2, ohNumber3, ohVector34, ohNumber5, ohBoolean6, ohBoolean7)
 end
 
 if Loop then
