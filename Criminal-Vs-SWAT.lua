@@ -1,8 +1,8 @@
 -- https://www.roblox.com/games/510444657/CRIMINAL-VS-SWAT
 local Global = getgenv and getgenv() or _G
 
-local TeamCheck = Global.TeamCheck or false
-local Loop = Global.LoopKill or false
+local TeamCheck = Global.TeamCheck or true
+local Loop = Global.Loop or true
 local StopMessage = Global.StopMessage or "stop"
 
 function Kill(v: Player)
