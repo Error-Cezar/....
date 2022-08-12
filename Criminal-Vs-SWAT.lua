@@ -3,6 +3,7 @@ local Global = getgenv and getgenv() or _G
 
 local TeamCheck = Global.TeamCheck or false
 local Loop = Global.LoopKill or false
+local StopMessage = Global.StopMessage or "stop"
 
 function Kill(v: Player)
     local ohInstance1 = v.Character.Humanoid
@@ -17,12 +18,16 @@ function Kill(v: Player)
 end
 
 if Loop then
-game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
+StepLoop = game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
+if Loop == false then StepLoop:Disconnect() return end
 for _,v in pairs(game:GetService("Players"):GetPlayers()) do
     if v == game:GetService("Players").LocalPlayer then continue end 
     if v.Team == game:GetService("Players").LocalPlayer.Team and TeamCheck then continue end
     Kill(v)
 end
+end)
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(message)
+    if message:lower() == StopMessage:lower() then Loop = false end
 end)
 else
     for _,v in pairs(game:GetService("Players"):GetPlayers()) do
