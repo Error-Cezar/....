@@ -1,6 +1,6 @@
 -- https://www.roblox.com/games/10219658196/Limited-Life
 local Global = getgenv and getgenv() or _G
-local Loop = Global.Looped or false
+local Loop = Global.Looped or true
 local Time = Global.Time or 500
 local StopMessage = Global.StopMessage or "stop"
 
