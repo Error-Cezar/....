@@ -16,6 +16,7 @@ if Loop then
     StepLoop = game:GetService("RunService").Stepped:Connect(function(time, deltaTime)
     if Loop == false then StepLoop:Disconnect() return end
        GetTime(Time)
+    wait()
     end)
     game:GetService("Players").LocalPlayer.Chatted:Connect(function(message)
         if message:lower() == StopMessage:lower() then Loop = false end
