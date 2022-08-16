@@ -3,7 +3,7 @@
 On August 16 of 2022 this script has been officially set as PATCHED.
 
 Thank you for being with us.
-
+#CK4ForEver
 ]]--
 
 -- Have fun ; https://www.roblox.com/games/4843291950/The-Conspiracies-of-Hawkins
@@ -18,6 +18,11 @@ local Chat = Global.Chat
 local start = Global.Enabled
 local Destroy = Global.Destroy
 if game.PlaceId ~= 4843291950 or start == false then return end
+Players.LocalPlayer:Kick([[
+On August 16 of 2022 this script has been officially set as PATCHED.
+
+Thank you for being with us #CK4ForEver.
+]])
 
 if ck4 == true and game:GetService("ReplicatedStorage"):FindFirstChild("BetterChatShared") then
 for i=1, 7 do
