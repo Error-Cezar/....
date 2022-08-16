@@ -1,3 +1,11 @@
+--[[
+
+On August 16 of 2022 this script has been officially set as PATCHED.
+
+Thank you for being with us.
+
+]]--
+
 -- Have fun ; https://www.roblox.com/games/4843291950/The-Conspiracies-of-Hawkins
 -- https://dsc.gg/coolkidd ; By Error-Cezar
 repeat wait() until game:IsLoaded()
