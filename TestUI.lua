@@ -1,11 +1,10 @@
 local Global = getgenv and getgenv() or _G
-local G = Global.__ErrorUI
 module = {}
 
 function module:CreateUI(Location, UIName: string)
     if Location == nil then Location = game:GetService("Players").LocalPlayer.PlayerGui end
     if UIName == nil then error("UIName is undefined") return end
-    G.Name = UIName
+    Global.__ErrorUIName = UIName
     local ScreenGui = Instance.new("ScreenGui", Location)
     local Frame = Instance.new("Frame")
     local UICorner = Instance.new("UICorner")
@@ -47,7 +46,7 @@ function module:CreateUI(Location, UIName: string)
     local Button_1 = Instance.new("TextButton")
     
     
-    ScreenGui.Name = Name or "ScreenGui"
+    ScreenGui.Name = UIName or "ScreenGui"
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     
     Frame.Parent = ScreenGui
@@ -311,7 +310,7 @@ function module:CreateUI(Location, UIName: string)
         Selector.Image = image
 
         Selector.Button.MouseButton1Click:Connect(function()
-            TextLabel.Text = G.Name.." | "..Name
+            TextLabel.Text = Global.__ErrorUIName.." | "..Name
             for _,v in pairs(Frames:GetChildren()) do
                 local boolvalue =  v == Main
                 v.Visible = boolvalue
@@ -340,6 +339,8 @@ function module:CreateUI(Location, UIName: string)
             function TextFunc:String()
                 return But.TextBox.Text or nil
             end
+
+            return TextFunc
         end
 
         function PageFunc:Label(Text: string)
