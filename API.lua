@@ -2,6 +2,14 @@
 
 module = {}
 
+function TableFind(Table: table, Arg: any)
+    for _,v in pairs(Table) do
+        if v == Arg then return true end
+    end
+    return nil
+end
+
+local UsedJob = {}
 local ESPStorage = {}
 local ESPPart = {}
 local httpService = game:GetService("HttpService")
@@ -48,14 +56,19 @@ function module:ServerHop()
 		end
 	end
 	if #x > 0 then
-		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+		local ID = x[math.random(1, #x)]
+		
+		if TableFind(UsedJob, ID) then warn("Found an used JobID") module:ServerHop() return end
+			
+		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, ID)
             connection = game:GetService("TeleportService").TeleportInitFailed:Connect(function(player, teleportResult, errorMessage)
                 if player == LP then
                    warn("Teleport failed, TeleportResult: "..teleportResult.Name)
                     -- check the teleportResult to ensure it is appropriate to retry
 			connection:Disconnect()
 			connection = nil
-                warn("Retrying ServerHoping")
+                        warn("Retrying ServerHoping")
+			table.insert(usedJob, ID) 
                         module:ServerHop()
                 end
             end)
