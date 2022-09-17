@@ -68,7 +68,7 @@ function module:ServerHop()
 			connection:Disconnect()
 			connection = nil
                         warn("Retrying ServerHoping")
-			table.insert(usedJob, ID) 
+			table.insert(UsedJob, ID) 
                         module:ServerHop()
                 end
             end)
