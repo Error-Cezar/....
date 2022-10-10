@@ -1,3 +1,4 @@
+local rname  = rconsolename
 local rwarn  = rconsolewarn
 local rinfo  = rconsoleinfo
 local rerror = rconsoleerr
@@ -39,6 +40,7 @@ end
 sc = {}
 local Enabled
 function sc:Start()
+rname("Smart Console")
 rwarn("SmartConsole Enabled")    
 Enabled = true
 end
